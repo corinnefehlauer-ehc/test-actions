@@ -43,7 +43,7 @@ jobs:
           cache-read-only: true
 
       - name: Change wrapper permissions
-        run: chmod +x ./gradlew --build-cache
+        run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew test
+        run: ./gradlew test --build-cache
