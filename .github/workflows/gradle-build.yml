@@ -22,7 +22,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build -x test
+        run: ./gradlew build -x test --build-cache
 
   test:
     needs: build
@@ -43,7 +43,7 @@ jobs:
           cache-read-only: true
 
       - name: Change wrapper permissions
-        run: chmod +x ./gradlew
+        run: chmod +x ./gradlew --build-cache
 
       - name: Build with Gradle Wrapper
         run: ./gradlew test
