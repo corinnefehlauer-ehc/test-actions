@@ -15,16 +15,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: false
-
-      - name: Cache Gradle layers
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          cache-write-only: true
+          cache-overwrite-existing: true
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
@@ -55,14 +47,6 @@ jobs:
           cache-read-only: false
           cache-cleanup: 'always'
 
-      - name: Restore Gradle cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-
       - name: Test Docker
         run: docker version
 
@@ -70,4 +54,4 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew test
+        run: ./gradlew test --build-cache
