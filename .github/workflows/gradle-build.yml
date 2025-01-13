@@ -1,0 +1,7 @@
+name: gradle-build
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: gradle:8.12-jdk21-corretto
+    steps:
+      - run: ./gradlew build
