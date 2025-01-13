@@ -17,14 +17,13 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: false
+          cache-cleanup: never
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build -x test --build-cache
-        with:
-          cache-cleanup: never
 
   test:
     needs: build
@@ -43,11 +42,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
+          cache-cleanup: always
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
         run: ./gradlew test --build-cache
-        with:
-          cache-cleanup: always
