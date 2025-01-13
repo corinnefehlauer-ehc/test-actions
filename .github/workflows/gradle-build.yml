@@ -26,6 +26,8 @@ jobs:
 
   test:
     needs: build
+    permissions:
+      checks: write
     runs-on: ubuntu-latest
     services:
       docker:
