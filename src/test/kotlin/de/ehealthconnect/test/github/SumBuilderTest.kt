@@ -9,4 +9,16 @@ class SumBuilderTest {
         val sumBuilder = SumBuilder()
         assertEquals(6, sumBuilder.sum(4, 3))
     }
+
+    @Test
+    fun testSum2() {
+        val sumBuilder = SumBuilder()
+        assertEquals(7, sumBuilder.sum(4, 3))
+    }
+
+    @Test
+    fun testSum3() {
+        val sumBuilder = SumBuilder()
+        assertEquals(8, sumBuilder.sum(4, 3))
+    }
 }
