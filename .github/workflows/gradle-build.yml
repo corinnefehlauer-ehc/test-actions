@@ -3,8 +3,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -17,19 +15,22 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: false
-          cache-cleanup: never
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build -x test --build-cache
+        run: ./gradlew build -x test
 
   test:
     needs: build
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+        ports:
+          - 2375:2375
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 21
@@ -41,11 +42,13 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          cache-read-only: true
-          cache-cleanup: always
+          cache-read-only: false
+
+      - name: Test Docker
+        run: docker version
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew test --build-cache
+        run: ./gradlew test
