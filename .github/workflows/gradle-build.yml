@@ -14,7 +14,7 @@ jobs:
           distribution: 'graalvm'
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: false
 
@@ -22,7 +22,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build -x test --configuration-cache
+        run: ./gradlew build -x test
 
   test:
     needs: build
@@ -38,12 +38,12 @@ jobs:
           distribution: 'graalvm'
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
         with:
-          cache-read-only: false
+          cache-read-only: true
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew test --configuration-cache
+        run: ./gradlew test
