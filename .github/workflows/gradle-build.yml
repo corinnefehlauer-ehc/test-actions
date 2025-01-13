@@ -23,6 +23,7 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew build -x test --build-cache
+        cache-cleanup: never
 
   test:
     needs: build
@@ -47,3 +48,4 @@ jobs:
 
       - name: Build with Gradle Wrapper
         run: ./gradlew test --build-cache
+        cache-cleanup: always
