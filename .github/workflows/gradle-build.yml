@@ -16,6 +16,7 @@ jobs:
         with:
           cache-read-only: false
           cache-write-only: true
+          cache-overwrite-existing: true
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
