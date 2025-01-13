@@ -7,6 +7,6 @@ class SumBuilderTest {
     @Test
     fun testSum() {
         val sumBuilder = SumBuilder()
-        assertEquals(5, sumBuilder.sum(2, 3))
+        assertEquals(7, sumBuilder.sum(4, 3))
     }
 }
