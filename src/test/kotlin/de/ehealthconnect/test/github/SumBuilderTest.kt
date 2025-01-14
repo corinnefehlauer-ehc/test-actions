@@ -18,7 +18,7 @@ class SumBuilderTest {
         assertEquals(7, sumBuilder.sum(4, 3))
     }
 
-    @Disabled
+    // @Disabled
     @Test
     fun testSum3() {
         val sumBuilder = SumBuilder()
