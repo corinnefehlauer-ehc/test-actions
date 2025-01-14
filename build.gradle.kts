@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.1.0"
+    id("jacoco")
 }
 
 group = "de.ehealthconnect"
@@ -23,6 +24,20 @@ java {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+jacoco { toolVersion = "0.8.12" }
 
 kotlin {
     compilerOptions {
