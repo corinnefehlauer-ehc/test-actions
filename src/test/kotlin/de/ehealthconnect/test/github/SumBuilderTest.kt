@@ -24,4 +24,10 @@ class SumBuilderTest {
         val sumBuilder = SumBuilder()
         assertEquals(8, sumBuilder.sum(4, 3))
     }
+
+    @Test
+    fun testUncovered() {
+        val sumBuilder = SumBuilder()
+        assertEquals(9, sumBuilder.uncovered(4, 3))
+    }
 }
